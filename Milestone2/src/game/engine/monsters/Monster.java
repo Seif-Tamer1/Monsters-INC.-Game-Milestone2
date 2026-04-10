@@ -13,13 +13,14 @@ public abstract class Monster implements Comparable<Monster> {
 	private boolean frozen;
 	private boolean shielded;
 	private int confusionTurns;
-	
-	public Monster(String name, String description, Role originalRole, int energy) {
+
+	public Monster(String name, String description, Role originalRole,
+			int energy) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.role = originalRole;
-		this.originalRole = originalRole; 
+		this.originalRole = originalRole;
 		this.energy = energy;
 		this.position = 0;
 		this.frozen = false;
@@ -34,11 +35,11 @@ public abstract class Monster implements Comparable<Monster> {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public Role getRole() {
 		return role;
 	}
-	
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
@@ -62,27 +63,27 @@ public abstract class Monster implements Comparable<Monster> {
 	public void setPosition(int position) {
 		this.position = position % Constants.BOARD_SIZE;
 	}
-	
+
 	public boolean isFrozen() {
 		return frozen;
 	}
-	
+
 	public void setFrozen(boolean frozen) {
 		this.frozen = frozen;
 	}
-	
+
 	public boolean isShielded() {
 		return shielded;
 	}
-	
+
 	public void setShielded(boolean shielded) {
 		this.shielded = shielded;
 	}
-	
+
 	public int getConfusionTurns() {
 		return confusionTurns;
 	}
-	
+
 	public void setConfusionTurns(int confusionTurns) {
 		this.confusionTurns = confusionTurns;
 	}
@@ -90,6 +91,37 @@ public abstract class Monster implements Comparable<Monster> {
 	@Override
 	public int compareTo(Monster other) {
 		return this.position - other.position;
+	}
+
+	public abstract void executePowerupEffect(Monster opponentMonster);
+
+	public boolean isConfused() {
+		if (this.confusionTurns == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public void move(int distance) {
+		this.setPosition(position + distance);
+	}
+
+	public final void alterEnergy(int energy) {
+		if (energy > 0) {
+			this.setEnergy(this.energy + energy);
+		} else if ((energy < 0) && (shielded == false)) {
+			this.setEnergy(this.energy + energy);
+		} else {
+			shielded = false;
+		}
+
+	}
+	public void decrementConfusion(){
+		if(confusionTurns>0){
+			confusionTurns--;
+		}else{
+			this.role=originalRole;
+		}	
 	}
 
 }
