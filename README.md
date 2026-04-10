@@ -1,4 +1,14 @@
 # Monsters-INC.-Game-Milestone2
-executePowerupEffect method is still not done fuck abousao/
-alter energy when shield otherwise setenergy/
-decrement confusion the oopponent will not have changed its role/
+//Monsters
+alternergy for all monsters except schemer setenery/
+
+//Game 
+ABOUSA WANTED TO START FROM BEGINNING WHICH IS AN IDEA SIMILAR TO HIS FACE
+VERY IMPORTANT TO NOT KILL MOHAB:VERY ROUGHLY 
+public use powerup(){
+    executepowerup();
+    if (frozen ==true)
+      playturn;
+      playturn;
+    else
+      playturn;
