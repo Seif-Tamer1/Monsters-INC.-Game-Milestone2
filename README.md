@@ -1,2 +1,2 @@
 # Monsters-INC.-Game-Milestone2
-DooR DasH: Scare vs Laugh Touchdown is a competitive board game set in the world of Monsters Inc., where the city of Monstropolis runs on energy collected from children. In this thrilling race, two monsters compete to prove who can collect the most energy while navigating the dangerous Floor. executePowerupEffect method is still not done because seif is a bitch 
+DooR DasH: Scare vs Laugh Touchdown is a competitive board game set in the world of Monsters Inc., where the city of Monstropolis runs on energy collected from children. In this thrilling race, two monsters compete to prove who can collect the most energy while navigating the dangerous Floor. executePowerupEffect method is still not done because seif is a bitch and a nigga
