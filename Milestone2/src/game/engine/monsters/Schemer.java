@@ -34,7 +34,7 @@ public class Schemer extends Monster {
 			target.setEnergy(0);
 			return returnedEnergy;
 		} else {
-			target.setEnergy(target.getEnergy()+Constants.SCHEMER_STEAL*(-2));
+			target.setEnergy(target.getEnergy()+Constants.SCHEMER_STEAL*(-1));
 			return Constants.SCHEMER_STEAL;
 		}
 
