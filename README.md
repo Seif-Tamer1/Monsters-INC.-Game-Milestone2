@@ -12,3 +12,12 @@ public use powerup(){
       playturn;
     else
       playturn;
+      
+//dasher
+powerup effect initialization changed
+
+//schemer 
+we did passive trait not affected by powerup
+
+//canister
+canister value we assumed it is the delta
