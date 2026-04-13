@@ -26,6 +26,8 @@ public class Schemer extends Monster {
 	public void setEnergy(int energy) {
 		super.setEnergy(energy + Constants.SCHEMER_STEAL);
 	}
+	
+
 
 	private int stealEnergyFrom(Monster target) {
 		

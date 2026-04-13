@@ -115,6 +115,7 @@ public abstract class Monster implements Comparable<Monster> {
 			shielded = false;
 		}
 
+		
 	}
 	public void decrementConfusion(){
 		if(confusionTurns>0){
@@ -123,5 +124,6 @@ public abstract class Monster implements Comparable<Monster> {
 			this.role=originalRole;
 		}	
 	}
+
 
 }
