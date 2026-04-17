@@ -42,4 +42,8 @@ public class Board {
 	public static void setCards(ArrayList<Card> cards) {
 		Board.cards = cards;
 	}
+	
+	public static Card drawCard(){
+		return null;
+	}
 }

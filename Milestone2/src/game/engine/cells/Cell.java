@@ -22,5 +22,16 @@ public class Cell {
 	public void setMonster(Monster monster) {
 		this.monster = monster;
 	}
+	
+	public boolean isOccupied(){
+		if (this.monster==null)
+			return false;
+		else
+			return true;
+	}
+	
+	public void onLand(Monster landingMonster, Monster opponentMonster){
+		setMonster(landingMonster);
+	}
 
 }
