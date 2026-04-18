@@ -43,7 +43,7 @@ public class DoorCell extends Cell implements CanisterModifier {
 		
 		if (this.activated==false){
 			ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
-			ArrayList<Monster> teammates = new ArrayList();
+			ArrayList<Monster> teammates = new ArrayList<Monster>();
 			for(int i=0; i<stationedMonsters.size(); i++){
 				if(stationedMonsters.get(i).getRole()==landingMonster.getRole()){
 					teammates.add(stationedMonsters.get(i));
