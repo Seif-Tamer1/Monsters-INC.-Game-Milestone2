@@ -21,3 +21,5 @@ we did passive trait not affected by powerup
 
 //canister
 canister value we assumed it is the delta
+
+//Board: initialize board: try/ catch for odd indicies in door cells not implemented 
