@@ -23,3 +23,4 @@ we did passive trait not affected by powerup
 canister value we assumed it is the delta
 
 //Board: initialize board: try/ catch for odd indicies in door cells not implemented 
+                           try/ catch for out of boundary index for constants conveyor belts not implemented 
