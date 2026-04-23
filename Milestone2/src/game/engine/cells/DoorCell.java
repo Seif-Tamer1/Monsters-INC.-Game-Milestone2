@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import game.engine.Board;
 import game.engine.Role;
+import game.engine.exceptions.InvalidMoveException;
 import game.engine.interfaces.CanisterModifier;
 import game.engine.monsters.Monster;
 

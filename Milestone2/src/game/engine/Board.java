@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import game.engine.cards.Card;
 import game.engine.cells.*;
+import game.engine.exceptions.InvalidMoveException;
 import game.engine.monsters.Monster;
+
 import java.util.Collections;
 
 public class Board {
@@ -45,7 +47,7 @@ public class Board {
 	}
 
 	public static Card drawCard() {
-		if (cards==null){
+		if (cards == null) {
 			reloadCards();
 		}
 		return cards.remove(0);
@@ -96,30 +98,48 @@ public class Board {
 				}
 			}
 		}
-		
-		for (int i=0; i<Constants.CARD_CELL_INDICES.length; i++){
-			setCell(Constants.CARD_CELL_INDICES[i],new CardCell(null));
+
+		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
+			setCell(Constants.CARD_CELL_INDICES[i], new CardCell(null));
 		}
-		
-		for (int i=0; i<Constants.MONSTER_CELL_INDICES.length; i++){
-			setCell(Constants.MONSTER_CELL_INDICES[i],new MonsterCell(null,stationedMonsters.get(i)));
+
+		for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length; i++) {
+			setCell(Constants.MONSTER_CELL_INDICES[i], new MonsterCell(null,
+					stationedMonsters.get(i)));
 		}
 
 	}
 
-	
-	 private void setCardsByRarity(){
-		 ArrayList<Card> temp= new ArrayList<Card>();
-		 for (int i=0; i<originalCards.size(); i++){
-			 for(int j=0; j<originalCards.get(i).getRarity(); j++){
-				 temp.add(originalCards.get(i));
-			 }
-		 }
-		 originalCards=temp;
-	 }
-	 
-	 public static void reloadCards(){
-		 cards=originalCards;
-		 Collections.shuffle(cards);
-	 }
+	private void setCardsByRarity() {
+		ArrayList<Card> temp = new ArrayList<Card>();
+		for (int i = 0; i < originalCards.size(); i++) {
+			for (int j = 0; j < originalCards.get(i).getRarity(); j++) {
+				temp.add(originalCards.get(i));
+			}
+		}
+		originalCards = temp;
+	}
+
+	public static void reloadCards() {
+		cards = originalCards;
+		Collections.shuffle(cards);
+	}
+
+	public void moveMonster(Monster currentMonster, int roll,
+			Monster opponentMonster) throws InvalidMoveException {
+		currentMonster.move(roll);
+		if (currentMonster.compareTo(opponentMonster) == 0) {
+			currentMonster.move(roll * (-1));
+			throw new InvalidMoveException();
+		}
+		boolean lastTurnConfused = currentMonster.isConfused();
+		Cell currentCell = getCell(currentMonster.getPosition());
+		currentCell.onLand(currentMonster, opponentMonster);
+
+		if (!(lastTurnConfused == false && currentMonster.isConfused() == true)) {
+			currentMonster.decrementConfusion();
+			opponentMonster.decrementConfusion();
+		}
+
+	}
 }
