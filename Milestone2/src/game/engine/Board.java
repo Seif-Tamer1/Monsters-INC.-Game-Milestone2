@@ -20,6 +20,8 @@ public class Board {
 		stationedMonsters = new ArrayList<Monster>();
 		originalCards = readCards;
 		cards = new ArrayList<Card>();
+		setCardsByRarity();
+		reloadCards();
 	}
 
 	public Cell[][] getBoardCells() {
@@ -127,19 +129,39 @@ public class Board {
 
 	public void moveMonster(Monster currentMonster, int roll,
 			Monster opponentMonster) throws InvalidMoveException {
+		int currentPosition=currentMonster.getPosition();
 		currentMonster.move(roll);
-		if (currentMonster.compareTo(opponentMonster) == 0) {
-			currentMonster.move(roll * (-1));
-			throw new InvalidMoveException();
-		}
+		
 		boolean lastTurnConfused = currentMonster.isConfused();
 		Cell currentCell = getCell(currentMonster.getPosition());
 		currentCell.onLand(currentMonster, opponentMonster);
+		
+		if (currentMonster.compareTo(opponentMonster) == 0) {
+			currentMonster.setPosition(currentPosition);
+			throw new InvalidMoveException();
+		}
 
 		if (!(lastTurnConfused == false && currentMonster.isConfused() == true)) {
 			currentMonster.decrementConfusion();
 			opponentMonster.decrementConfusion();
 		}
+		
+		updateMonsterPositions(currentMonster, opponentMonster);
 
+	}
+	
+	private void updateMonsterPositions(Monster player, Monster opponent){
+		
+		for (int i=0; i<boardCells.length; i++){
+			for(int j=0; j<boardCells[i].length; j++){
+				boardCells[i][j].setMonster(null);
+			}
+		}
+		Cell playercell= getCell(player.getPosition());
+		Cell opponentcell= getCell(opponent.getPosition());
+		
+		playercell.setMonster(player);
+		opponentcell.setMonster(opponent);
+		
 	}
 }
