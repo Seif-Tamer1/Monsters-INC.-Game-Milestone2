@@ -36,7 +36,10 @@ public class DoorCell extends Cell implements CanisterModifier {
 		this.activated = isActivated;
 	}
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		monster.alterEnergy(canisterValue);	
+		if (this.role==monster.getRole())
+			monster.alterEnergy(canisterValue);	
+		else
+			monster.alterEnergy(canisterValue*(-1));	
 	}
 	
 	public void onLand(Monster landingMonster, Monster opponentMonster){
@@ -59,10 +62,10 @@ public class DoorCell extends Cell implements CanisterModifier {
 				setActivated(true);
 			}else{
 				boolean var=landingMonster.isShielded();
-				modifyCanisterEnergy(landingMonster, this.energy*(-1));
+				modifyCanisterEnergy(landingMonster, this.energy);
 				if (var==false){
 					for(int i=0; i<teammates.size(); i++){
-						modifyCanisterEnergy(teammates.get(i), this.energy*(-1));
+						modifyCanisterEnergy(teammates.get(i), this.energy);
 					}
 					setActivated(true);
 				}
