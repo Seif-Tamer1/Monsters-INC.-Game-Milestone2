@@ -137,18 +137,24 @@ public class Board {
 		int currentPosition=currentMonster.getPosition();
 		currentMonster.move(roll);
 		
-		boolean lastTurnConfused = currentMonster.isConfused();
-		Cell currentCell = getCell(currentMonster.getPosition());
-		currentCell.onLand(currentMonster, opponentMonster);
-		
 		if (currentMonster.compareTo(opponentMonster) == 0) {
 			currentMonster.setPosition(currentPosition);
 			throw new InvalidMoveException();
 		}
+		
+		boolean lastTurnConfused = currentMonster.isConfused();
+		Cell currentCell = getCell(currentMonster.getPosition());
+		currentCell.onLand(currentMonster, opponentMonster);
+		
 
 		if (!(lastTurnConfused == false && currentMonster.isConfused() == true)) {
 			currentMonster.decrementConfusion();
+			
+		}
+		
+		if (!(lastTurnConfused == false && opponentMonster.isConfused() == true)) {
 			opponentMonster.decrementConfusion();
+			
 		}
 		
 		updateMonsterPositions(currentMonster, opponentMonster);
