@@ -49,7 +49,7 @@ public class Board {
 	}
 
 	public static Card drawCard() {
-		if (cards == null) {
+		if (cards.isEmpty()) {
 			reloadCards();
 		}
 		return cards.remove(0);
@@ -127,8 +127,9 @@ public class Board {
 	}
 
 	public static void reloadCards() {
-		cards = originalCards;
-		Collections.shuffle(cards);
+		
+		Collections.shuffle(originalCards);
+		cards.addAll(originalCards);
 	}
 
 	public void moveMonster(Monster currentMonster, int roll,
