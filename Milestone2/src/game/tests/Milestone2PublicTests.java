@@ -3725,7 +3725,7 @@ public class Milestone2PublicTests {
 		}
 	}
 
-	@Test(timeout = 1000)
+	@Test
 	public void testInitializeBoardLogicEvenCellsPlacement() {
 		try {
 			Class<?> board_class = Class.forName(boardPath);

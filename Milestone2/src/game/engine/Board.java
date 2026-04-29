@@ -83,6 +83,10 @@ public class Board {
 		int oddindex = 1;
 		int convoyerCounter = 0;
 		int sockCounter = 0;
+		
+		for (int i=Constants.STARTING_POSITION; i<=Constants.WINNING_POSITION; i++){
+			setCell(i,new Cell("NormalCell"));
+		}
 
 		for (int i = 0; i < specialCells.size(); i++) {
 			if (specialCells.get(i) instanceof DoorCell) {
@@ -102,12 +106,12 @@ public class Board {
 		}
 
 		for (int i = 0; i < Constants.CARD_CELL_INDICES.length; i++) {
-			setCell(Constants.CARD_CELL_INDICES[i], new CardCell(null));
+			setCell(Constants.CARD_CELL_INDICES[i], new CardCell("CardCell"));
 		}
 
-		for (int i = 0; i < Constants.MONSTER_CELL_INDICES.length; i++) {
-			setCell(Constants.MONSTER_CELL_INDICES[i], new MonsterCell(null,
-					stationedMonsters.get(i)));
+		for (int i = 0; i < stationedMonsters.size(); i++) {
+			setCell(Constants.MONSTER_CELL_INDICES[i], new MonsterCell(stationedMonsters.get(i).getName(),stationedMonsters.get(i)));
+			stationedMonsters.get(i).setPosition(Constants.MONSTER_CELL_INDICES[i]);
 		}
 
 	}

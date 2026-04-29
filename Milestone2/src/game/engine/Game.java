@@ -27,10 +27,10 @@ public class Game {
 		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
 		this.current = player;
 		
-		ArrayList<Monster> stationedMonsters = new ArrayList<>(allMonsters);
-		stationedMonsters.remove(player);
-		stationedMonsters.remove(opponent);
-		board.setStationedMonsters(stationedMonsters);
+		
+		allMonsters.remove(player);
+		allMonsters.remove(opponent);
+		board.getStationedMonsters().addAll(allMonsters);
 		
 		board.initializeBoard(DataLoader.readCells());
 	}
@@ -98,11 +98,12 @@ public class Game {
 	
 	public void playTurn() throws InvalidMoveException{
 		if (current.isFrozen()==true){
-			switchTurn();
+			
 			current.setFrozen(false);
+			switchTurn();
 		}else{
 			int roll=rollDice();
-			board.moveMonster(current,roll,opponent);
+			board.moveMonster(current,roll,getCurrentOpponent());
 			switchTurn();
 		}
 	}
